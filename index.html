@@ -1,14 +1,198 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#09080d" />
-    <meta name="description" content="A personal 11-month milestone experience." />
-    <title>Obsidian Heart</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Obsidian Heart ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes dropIn {
+            0% { opacity: 0; transform: translateY(-100px) scale(0.8); }
+            60% { opacity: 1; transform: translateY(10px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-scale-up { animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-drop-in { animation: dropIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+    </style>
+</head>
+<body class="bg-black text-white font-sans select-none overflow-hidden h-screen flex flex-col items-center justify-center">
+
+    <!-- Background Video / Ambient Layer -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/80 z-10"></div>
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover filter brightness-50">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-night-sky-background-loop-2565-large.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="relative z-20 w-full h-full flex flex-col items-center justify-center p-4"></div>
+
+    <!-- React & Babel CDNs to run the app directly in browser -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        function App() {
+            const [scene, setScene] = React.useState('intro');
+            const [reasonIndex, setReasonIndex] = React.useState(0);
+            const [giftOpened, setGiftOpened] = React.useState(false);
+
+            const reasons = [
+                "Your laugh is literally my favorite sound in the entire world.",
+                "You always know how to turn my worst days around into good ones.",
+                "How comfortable and safe I feel whenever I am with you.",
+                "Your incredible kindness and how much you care about the little things.",
+                "The endless inside jokes and goofy conversations we share.",
+                "How beautiful you look when you aren't even trying.",
+                "Your support and how you always believe in me.",
+                "The way your eyes light up when you talk about things you love.",
+                "How easy it is to talk to you about absolutely anything for hours.",
+                "You make ordinary, boring days feel like an adventure.",
+                "Simply because you are you, and you chose me."
+            ];
+
+            return (
+                <div className="w-full h-full flex flex-col items-center justify-center p-4 max-w-2xl mx-auto text-center">
+                    
+                    {/* SCENE 1: INTRO */}
+                    {scene === 'intro' && (
+                        <div className="animate-fade-in flex flex-col items-center">
+                            <span className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-sm text-pink-300 mb-6 tracking-widest uppercase">
+                                ✨ Cinematic Experience
+                            </span>
+                            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">
+                                Project Obsidian Heart
+                            </h1>
+                            <p className="text-gray-300 text-lg mb-8 font-light">
+                                Celebrating our incredible 11 months together.
+                            </p>
+                            <button
+                                onClick={() => setScene('letter1')}
+                                className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold text-lg shadow-xl shadow-pink-500/30 hover:scale-105 transition-all"
+                            >
+                                Begin Experience ➔
+                            </button>
+                        </div>
+                    )}
+
+                    {/* SCENE 2 & 3: FIRST LETTER */}
+                    {scene === 'letter1' && (
+                        <div className="animate-scale-up w-full bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-2xl text-left">
+                            <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+                                <h3 className="text-xl font-bold text-pink-300">To the one who holds my heart...</h3>
+                                <span className="text-xs uppercase tracking-widest text-gray-400">11 Months</span>
+                            </div>
+                            <p className="text-gray-200 text-base md:text-lg leading-relaxed font-light mb-8">
+                                I can hardly believe that 11 months have already flown by since we started this journey together. Every single day feels brighter, warmer, and infinitely more meaningful with you by my side. Thank you for being your wonderful, amazing self and for giving me a million reasons to smile.
+                            </p>
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => setScene('reasons')}
+                                    className="px-6 py-3 rounded-full bg-pink-500 hover:bg-pink-600 text-white font-medium shadow-lg transition-all"
+                                >
+                                    Continue to Reasons ➔
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* SCENE 6: 11 REASONS */}
+                    {scene === 'reasons' && (
+                        <div className="animate-fade-in w-full flex flex-col items-center">
+                            <span className="px-4 py-1.5 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-300 text-xs uppercase font-semibold mb-4">
+                                Reason {reasonIndex + 1} of 11
+                            </span>
+                            <div className="w-full min-h-[200px] bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 flex items-center justify-center text-center mb-6 shadow-2xl">
+                                <p className="text-xl md:text-2xl text-gray-100 font-medium">
+                                    "{reasons[reasonIndex]}"
+                                </p>
+                            </div>
+                            {reasonIndex < reasons.length - 1 ? (
+                                <button
+                                    onClick={() => setReasonIndex(prev => prev + 1)}
+                                    className="px-8 py-3 rounded-full bg-pink-500 text-white font-semibold hover:scale-105 transition-all"
+                                >
+                                    Next Reason ➔
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => setScene('gift')}
+                                    className="px-8 py-3 rounded-full bg-purple-600 text-white font-semibold hover:scale-105 transition-all animate-bounce"
+                                >
+                                    Open Your Gift Box 🎁
+                                </button>
+                            )}
+                        </div>
+                    )}
+
+                    {/* SCENE 7 & 8: GIFT BOX */}
+                    {scene === 'gift' && (
+                        <div className="animate-drop-in flex flex-col items-center">
+                            <h2 className="text-3xl font-bold mb-2">A Special Surprise</h2>
+                            <p className="text-gray-300 text-sm mb-6">Waiting for you IRL!</p>
+                            
+                            <div 
+                                onClick={() => setGiftOpened(true)}
+                                className="w-44 h-44 rounded-3xl bg-gradient-to-br from-pink-500 to-purple-700 shadow-2xl border-2 border-white/30 flex items-center justify-center cursor-pointer hover:scale-105 transition-all mb-6 relative"
+                            >
+                                <div className="absolute inset-y-0 w-6 bg-amber-300"></div>
+                                <div className="absolute inset-x-0 h-6 bg-amber-300"></div>
+                                <span className="relative z-10 text-3xl">🎁</span>
+                            </div>
+
+                            {giftOpened ? (
+                                <button
+                                    onClick={() => setScene('letter2')}
+                                    className="px-8 py-3 rounded-full bg-pink-500 text-white font-semibold hover:scale-105 transition-all animate-fade-in"
+                                >
+                                    Read Second Letter ➔
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => setGiftOpened(true)}
+                                    className="px-6 py-3 rounded-full bg-white/20 border border-white/30 text-white font-semibold"
+                                >
+                                    Click to Open Box
+                                </button>
+                            )}
+                        </div>
+                    )}
+
+                    {/* SCENE 9 & 10: SECOND LETTER & ENDING */}
+                    {scene === 'letter2' && (
+                        <div className="animate-scale-up w-full bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-2xl text-left">
+                            <h3 className="text-xl font-bold text-pink-300 mb-4">Looking forward to forever</h3>
+                            <p className="text-gray-200 text-base md:text-lg leading-relaxed font-light mb-6">
+                                As we stand just one month away from our full one-year anniversary, I wanted to remind you how deeply I adore you. Thank you for every laugh and every warm hug. Here's to our 11 months, and all our tomorrows! ❤️
+                            </p>
+                            <div className="flex flex-col items-center">
+                                <button
+                                    onClick={() => { setScene('intro'); setReasonIndex(0); setGiftOpened(false); }}
+                                    className="px-6 py-3 rounded-full bg-white/10 border border-white/20 text-sm font-medium hover:bg-white/20 transition-all"
+                                >
+                                    Replay Experience 💫
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+    </script>
+</body>
 </html>
